@@ -22,9 +22,9 @@ namespace bullpgia {
 		}
 
 		for (int i=0; i<length; ++i) //check pgia
-			if (choiceChecked[i]) //not used
+			if (choiceChecked[i]) //did not used in bool
 				for (int j=0; j<length; ++j)
-					if (guessChecked[j] && choice[i] == guess[j]){ //not used
+					if (guessChecked[j] && choice[i] == guess[j]){ //did not used in bool
 						choiceChecked[i] = false;
 						guessChecked[j] = false;
 						pgia++;

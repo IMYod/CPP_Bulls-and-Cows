@@ -6,30 +6,25 @@ namespace bullpgia {
 	const string calculateBullAndPgia(const string choice, const string guess){
 		uint length = choice.length();
 		int bools=0, pgia=0;
-		bool choiceChecked[length]; //true if the digit didn't used for bool\pgia
-		bool guessChecked[length];
-		for (int i=0; i<length; ++i) { //intilize the arrays
-			choiceChecked[i] = true;
-			guessChecked[i] = true;
+		uint choiceCount[10]; //count i digits in choice
+		uint guessCount[10]; //count i digits in guess
+		for (int i=0; i<10; ++i) { //intilize the arrays
+			choiceCount[i] = 0;
+			guessCount[i] = 0;
 		}
 
-		for (int i=0; i<length; ++i) { //check bool
-			if (choice[i] == guess[i]){
+		for (int i=0; i<length; ++i) {
+			if (choice[i] == guess[i]) //check bool
 				bools++;
-				choiceChecked[i] = false;
-				guessChecked[i] = false;
-			}				
+			choiceCount[int(choice[i])]++;
+			guessCount[int(guess[i])]++;
 		}
-
-		for (int i=0; i<length; ++i) //check pgia
-			if (choiceChecked[i]) //did not used in bool
-				for (int j=0; j<length; ++j)
-					if (guessChecked[j] && choice[i] == guess[j]){ //did not used in bool
-						choiceChecked[i] = false;
-						guessChecked[j] = false;
-						pgia++;
-					}
-
-		return (to_string(bools) +"," + to_string(pgia));
+		
+		int sumBullAndPgia = 0;
+		for (int i=0; i<10; ++i) {
+			sumBullAndPgia += std::min(choiceCount[i], guessCount[i]);
+		}
+		
+		return (to_string(bools) +"," + to_string(sumBullAndPgia - bools));
 	}
 }

@@ -13,9 +13,6 @@ class ConstantGuesser: public bullpgia::Guesser {
 		string guess() override {
 			return myConstantString;
 		}
-
-		void startNewGame(uint theLength) override{ ;}
-		void learn(string response) override{ ;}
 };
 
 /**
@@ -24,6 +21,4 @@ class ConstantGuesser: public bullpgia::Guesser {
 class RandomGuesser: public bullpgia::Guesser {
 	string guess() override;
 
-	void startNewGame(uint theLength) override{ ;}
-	void learn(string response) override{ ;}
 };

@@ -19,3 +19,4 @@ class SmartGuesser: public bullpgia::Guesser {
 };
 
 std::string numToGuess(int num, uint length);
+std::string guessByMinOccur(uint length, std::unordered_set<std::string>&);

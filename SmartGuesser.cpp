@@ -12,7 +12,7 @@ string SmartGuesser::guess() {
 		//strategy: guess any possible number
 		guess = *myset.begin();
 	}
-	else if (lastGuess == "-1"){
+	else if (lastGuess == "-1"){ //first guess
 		guess = "";
 		for (int i=0; i<length; i++)
 			guess += to_string(i);

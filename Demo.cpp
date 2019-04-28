@@ -33,6 +33,19 @@ int main() {
 	for (uint i=0; i<100; ++i) {
 		cout << play(rc, smarty, 4, 100) << endl;  // smarty should always win in at most 10 turns!
 	}
+
+/*	int max = 0;
+	for (int i=0; i<=9999; ++i){
+		if (i%100 == 0)
+			cout << "max=" << max << ", i=" << i << endl;
+		ConstantChooser cc(numToGuess(i,4));
+		int turns = play(cc, smarty, 4, 100);  // smarty should always win in at most 10 turns!
+		if (turns > max)
+			max = turns;
+	}
+
+	cout << "total max=" << max << endl;*/
+
 	return 0;
 }
 

@@ -4,7 +4,7 @@
 using std::string, std::to_string;
 
 namespace bullpgia {
-	const string calculateBullAndPgia(const string choice, const string guess){
+	const answer calculateBullAndPgia(const string choice, const string guess){
 		uint length = choice.length();
 		int bools=0, pgia=0;
 		uint choiceCount[10]; //count i digits in choice
@@ -26,6 +26,9 @@ namespace bullpgia {
 			sumBullAndPgia += std::min(choiceCount[i], guessCount[i]);
 		}
 		
-		return (to_string(bools) +"," + to_string(sumBullAndPgia - bools));
+		answer ans_clalculte;
+		ans_clalculte.bull = bools;
+		ans_clalculte.pgia = sumBullAndPgia - bools;
+		return ans_clalculte;
 	}
 }

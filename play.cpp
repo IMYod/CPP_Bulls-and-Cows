@@ -17,16 +17,16 @@ namespace bullpgia {
 		const uint TECHNICAL_VICTORY_TO_CHOOSER = maxTurns+1;
 
 		string choice = chooser.choose(length);
+		std::cout << "I choose: " << choice << std::endl;
 		if (choice.length()!=length)       // Illegal choice
 			return TECHNICAL_VICTORY_TO_GUESSER;
 		guesser.startNewGame(length);  // tell the guesser that a new game starts now
 		uint indexOfTurn;
 		for (indexOfTurn=0; indexOfTurn<maxTurns; ++indexOfTurn) {
 			string guess = guesser.guess();
-			if (guess.length()!=length){  // Illegal guess
-			std::cout << "well1..." <<std::endl;
+			std::cout << "guess:" << guess << std::endl;
+			if (guess.length()!=length)  // Illegal guess
 				return TECHNICAL_VICTORY_TO_CHOOSER;
-}
 			if (guess==choice) {
 				return indexOfTurn + 1; 
 			} else {

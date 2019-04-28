@@ -18,6 +18,7 @@ using namespace std;
 
 using namespace bullpgia;
 
+
 int main() {
 
 	badkan::TestCase testcase;

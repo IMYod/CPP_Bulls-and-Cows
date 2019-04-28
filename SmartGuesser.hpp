@@ -10,13 +10,18 @@
 class SmartGuesser: public bullpgia::Guesser {
 	private:
 		std::unordered_set<std::string> myset;
+		std::unordered_set<std::string> newSet; //using in learn function
 		std::string lastGuess;
+		
+		std::string guessByEfficiency();
+		std::string guessByMinOccur();
 
 	public:
 		std::string guess() override;
 		void startNewGame(uint theLength) override;
-		void learn(std::string response) override;
+		void learn(bullpgia::answer response) override;
 };
 
 std::string numToGuess(int num, uint length);
-std::string guessByMinOccur(uint length, std::unordered_set<std::string>&);
+
+

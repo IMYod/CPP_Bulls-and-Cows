@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "calculate.hpp"
 
 
 namespace bullpgia {
@@ -9,6 +10,6 @@ namespace bullpgia {
 			uint length;
 			virtual std::string guess()=0;
 			virtual void startNewGame(uint theLength) {length = theLength;}
-			virtual void learn(std::string) {;}
+			virtual void learn(answer) {;}
  	};
 }

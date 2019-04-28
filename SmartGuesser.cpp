@@ -8,12 +8,20 @@ using std::string, std::to_string, std::unordered_set, bullpgia::answer;
 
 string SmartGuesser::guess() {
 	string guess;
-	if (myset.size()*pow(10.0, length) > 500000 || myset.size()<=2){
+	if (myset.size()<=2){
 		//strategy: guess any possible number
 		guess = *myset.begin();
 	}
-	else
+	else if (lastGuess == "-1"){
+		guess = "";
+		for (int i=0; i<length; i++)
+			guess += to_string(i);
+	}
+	else if (myset.size()*pow(10.0, length) < 500000) 
 		guess = guessByEfficiency();
+	else
+		//strategy: guess any possible number
+		guess = *myset.begin();
 	
 	this->lastGuess = guess;
 	return guess;
@@ -25,6 +33,7 @@ void SmartGuesser::startNewGame(uint theLength) {
 		this->myset.insert(numToGuess(i,theLength));
 	}
 	length = theLength;
+	lastGuess="-1";
 }
 void SmartGuesser::learn(answer response) {
 	//if number in myset is match to the response -> insert it to the new set

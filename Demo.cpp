@@ -16,7 +16,7 @@ using namespace std;
 using namespace bullpgia;
 
 int main() {
-	ConstantChooser c1234{"1234"}, c12345{"12345"}, c9999{"9999"};
+	/*ConstantChooser c1234{"1234"}, c12345{"12345"}, c9999{"9999"};
 	ConstantGuesser g1234{"1234"}, g12345{"12345"}, g9999{"9999"};
 	cout << play(c1234, g1234, 4, 100) << endl;  // prints 1 - guesser wins in one turn.
 	cout << play(c1234, g9999, 4, 100) << endl;  // prints 101 - guesser loses by running out of turns 
@@ -27,14 +27,16 @@ int main() {
 	RandomGuesser rg;
 	for (uint i=0; i<100; ++i) {
 		cout << play(rc, rg, 2, 100) << endl;  // guesser should often win but sometimes lose.
-	}
+	}*/
 
 	SmartGuesser smarty;
+/*	int sum = 0;
 	for (uint i=0; i<100; ++i) {
-		cout << play(rc, smarty, 4, 100) << endl;  // smarty should always win in at most 10 turns!
+		sum += play(rc, smarty, 4, 100);  // smarty should always win in at most 10 turns!
 	}
+	cout << "average is:" << sum/100.0 << endl;*/
 
-/*	int max = 0;
+	int max = 0;
 	for (int i=0; i<=9999; ++i){
 		if (i%100 == 0)
 			cout << "max=" << max << ", i=" << i << endl;
@@ -44,7 +46,7 @@ int main() {
 			max = turns;
 	}
 
-	cout << "total max=" << max << endl;*/
+	cout << "total max=" << max << endl;
 
 	return 0;
 }

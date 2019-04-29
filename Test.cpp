@@ -18,7 +18,7 @@ using namespace std;
 
 using namespace bullpgia;
 
-
+/****Help function for our Tests******/////////
 string numberToGuess(int num, uint length){
 	string guess = to_string(num);
         int numOfZeros = length - guess.length();
@@ -26,7 +26,7 @@ string numberToGuess(int num, uint length){
 		guess = "0" + guess;
         return guess;
 }
-
+/************************************/////////
 
 int main() {
 
@@ -62,9 +62,25 @@ int main() {
         .CHECK_OUTPUT(calculateBullAndPgia("01234","00112"), "1,2")      // 1 bull, 2 pgia
         .CHECK_OUTPUT(calculateBullAndPgia("12","12"), "2,0")      // 4 bull, 0 pgia
         .CHECK_OUTPUT(calculateBullAndPgia("1","1"), "1,0")      // 4 bull, 0 pgia
-        .CHECK_OUTPUT(calculateBullAndPgia("12","21"), "0,2")      // 4 bull, 0 pgia
-        .CHECK_OUTPUT(calculateBullAndPgia("123","321"), "1,2");      // 1 bull, 3 pgia
-
+        .CHECK_OUTPUT(calculateBullAndPgia("12","21"), "0,2")      // 0 bull, 2 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("123","321"), "1,2")      // 1 bull, 3 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("55","65"), "1,0")      // 1 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("55","55"), "2,0")      // 2 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("111","111"), "3,0")      // 3 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("123","423"), "2,0")      // 2 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("123","453"), "1,0")      // 1 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("123","137"), "1,1")      // 1 bull, 1 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("567","576"), "1,2")      // 1 bull, 2 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("156","615"), "0,3")      // 0 bull, 3 pgia
+	.CHECK_OUTPUT(calculateBullAndPgia("5","5"), "1,0")      // 1 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("5","0"), "0,0")     // 0 bull, 0 pgia
+        .CHECK_OUTPUT(calculateBullAndPgia("1154245","1425422"), "1,4")      // 1 bull, 3 pgia
+	.CHECK_OUTPUT(calculateBullAndPgia("78878887","77778888"), "5,2")  // 5 bull, 2 pgia
+	.CHECK_OUTPUT(calculateBullAndPgia("1634522","2641352"), "2,5") // 2 bull, 5 pgia
+	.CHECK_OUTPUT(calculateBullAndPgia("01234567899876543210","9876543210123456789"), "1,18") // 1 bull, 18 pgia                              
+	.CHECK_OUTPUT(calculateBullAndPgia("1111222233334444555566667777888899995","2233333554845553212120100011201213133"), "0,20");  // 0 bull, 20 pgia                    	         
+				            
+//----------------------------------------------------------------------------------------------------//
 
 	testcase.setname("Play with dummy choosers and guessers")
 	.CHECK_EQUAL(play(c1234, g1234, 4, 100), 1)      // guesser wins in one turn.
@@ -89,7 +105,7 @@ int main() {
         
    
 
-		
+//------------------------------------------------------------------------------------------------//		
 
 	testcase.setname("Play with smart guesser");
 	RandomChooser randy;
@@ -112,8 +128,9 @@ int main() {
 	for (uint i=0; i<100; ++i) {
 		testcase.CHECK_EQUAL(play(randy, smarty, 1, 100)<=100, true);  // smarty should always win in at most 100 turns!
 	}
-		   
-	for (int i=0; i<10000; i++){
+	
+	//Some cases with 4 digits!!
+	for (int i=800; i<1300; i++){
 		ConstantChooser chooseAll { numberToGuess(i, 4)};
 		testcase.CHECK_EQUAL(play(chooseAll, smarty, 4, 100)<=100, true);  // smarty should always win in at most 100 turns!        
 	}

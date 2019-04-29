@@ -112,7 +112,8 @@ int main() {
 	for (uint i=0; i<100; ++i) {
 		testcase.CHECK_EQUAL(play(randy, smarty, 1, 100)<=100, true);  // smarty should always win in at most 100 turns!
 	}
-		   
+	
+	//All cases with 4 digits!!
 	for (int i=0; i<10000; i++){
 		ConstantChooser chooseAll { numberToGuess(i, 4)};
 		testcase.CHECK_EQUAL(play(chooseAll, smarty, 4, 100)<=100, true);  // smarty should always win in at most 100 turns!        

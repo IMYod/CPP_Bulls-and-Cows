@@ -7,7 +7,7 @@
 using std::string, std::to_string, std::unordered_set, bullpgia::answer;
 
 string SmartGuesser::guess() {
-	/*string guess;
+	string guess;
 	if (myset.size()<=2){
 		//strategy: guess any possible number
 		guess = *myset.begin();
@@ -24,8 +24,8 @@ string SmartGuesser::guess() {
 		guess = *myset.begin();
 	
 	this->lastGuess = guess;
-	return guess;*/
-	return "0";
+	return guess;
+	
 }
 
 void SmartGuesser::startNewGame(uint theLength) {

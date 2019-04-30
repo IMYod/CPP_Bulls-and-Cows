@@ -5,6 +5,7 @@ using std::string, std::to_string;
 
 namespace bullpgia {
 	const answer calculateBullAndPgia(const string choice, const string guess){
+		std::cout<< "choice: " << choice << "guess: " << guess << std::endl;
 		uint length = choice.length();
 		int bools=0, pgia=0;
 		uint choiceCount[10]; //count i digits in choice

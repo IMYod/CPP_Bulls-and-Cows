@@ -48,6 +48,7 @@ int main() {
 	our tests
 	*******/
         testcase.setname("Calculate bull and pgia tests")
+	.CHECK_OUTPUT(calculateBullAndPgia("0",""), "0,0")      // 0 bull, 0 pgia            	
 	.CHECK_OUTPUT(calculateBullAndPgia("4567","1254"), "0,2")      // 0 bull, 2 pgia            
 	.CHECK_OUTPUT(calculateBullAndPgia("4567","4576"), "2,2")      // 2 bull, 2 pgia    
       	.CHECK_OUTPUT(calculateBullAndPgia("4567","7465"), "1,3")      // 1 bull, 3 pgia    
@@ -77,7 +78,31 @@ int main() {
         .CHECK_OUTPUT(calculateBullAndPgia("1154245","1425422"), "1,4")      // 1 bull, 4 pgia
 	.CHECK_OUTPUT(calculateBullAndPgia("78878887","77778888"), "5,2")  // 5 bull, 2 pgia
 	.CHECK_OUTPUT(calculateBullAndPgia("1634522","2641352"), "2,5") // 2 bull, 5 pgia
-	.CHECK_OUTPUT(calculateBullAndPgia("01234567899876543210","9876543210123456789"), "1,18") // 1 bull, 18 pgia                              
+         .CHECK_OUTPUT(calculateBullAndPgia("2800215363","4764144670"), "0,3") 	
+	.CHECK_OUTPUT(calculateBullAndPgia("9669656009","8683488398"), "1,1") 
+	.CHECK_OUTPUT(calculateBullAndPgia("5342347096","7691607883"), "1,4") 
+	.CHECK_OUTPUT(calculateBullAndPgia("2800215363","4764144670"), "0,3") 
+	.CHECK_OUTPUT(calculateBullAndPgia("3963538307","8550276028"), "0,5") 
+	.CHECK_OUTPUT(calculateBullAndPgia("6176315347","2562980031"), "0,4") 
+	.CHECK_OUTPUT(calculateBullAndPgia("0708539772","5796457075"), "2,4") 
+	.CHECK_OUTPUT(calculateBullAndPgia("8119989091","0596072852"), "0,3") 
+	.CHECK_OUTPUT(calculateBullAndPgia("2800215363","4764144670"), "0,3") 
+	.CHECK_OUTPUT(calculateBullAndPgia("6535782560","7407600135"), "0,5") 
+	.CHECK_OUTPUT(calculateBullAndPgia("8568760179","8885937926"), "1,5") 
+	.CHECK_OUTPUT(calculateBullAndPgia("5139381503","1556375681"), "1,5") 
+	.CHECK_OUTPUT(calculateBullAndPgia("456830914934","132730091019"), "2,4") 	
+	.CHECK_OUTPUT(calculateBullAndPgia("348686083500","183574332196"), "0,6") 
+	.CHECK_OUTPUT(calculateBullAndPgia("715125238819","228107580690"), "1,7") 
+	.CHECK_OUTPUT(calculateBullAndPgia("670275899751","472529586696"), "1,7") 
+	.CHECK_OUTPUT(calculateBullAndPgia("157473257537","636168868739"), "1,3") 
+	.CHECK_OUTPUT(calculateBullAndPgia("160464846405","888379121428"), "1,2") 
+	.CHECK_OUTPUT(calculateBullAndPgia("670183690121","229575583455"), "0,5") 
+	.CHECK_OUTPUT(calculateBullAndPgia("8119989091","0596072852"), "0,3") 
+	.CHECK_OUTPUT(calculateBullAndPgia("301811152259","652257358652"), "2,4")
+	.CHECK_OUTPUT(calculateBullAndPgia("978803761355","652239020177"), "0,8") 
+	.CHECK_OUTPUT(calculateBullAndPgia("960273899838","068885053606"), "1,5") 
+	.CHECK_OUTPUT(calculateBullAndPgia("605276988440","689446661781"), "2,6") 
+         .CHECK_OUTPUT(calculateBullAndPgia("01234567899876543210","9876543210123456789"), "1,18") // 1 bull, 18 pgia                              
 	.CHECK_OUTPUT(calculateBullAndPgia("1111222233334444555566667777888899995","2233333554845553212120100011201213133"), "0,20");  // 0 bull, 20 pgia                    	         
 				            
 //----------------------------------------------------------------------------------------------------//
@@ -93,12 +118,12 @@ int main() {
 	*******/
 
         testcase.setname("Our tests")
-	.CHECK_EQUAL(play(c456789, g456789, 6, 100), 1)      // guesser wins in one turn.
         .CHECK_EQUAL(play(c456789, g456789, 6, 100), 1)      // guesser wins in one turn.
-	.CHECK_EQUAL(play(c456789, g111111, 6, 100), 101)      // guesser loses by running out of turns
+        .CHECK_EQUAL(play(c456789, g456789, 6, 100), 1)      // guesser wins in one turn.
+        .CHECK_EQUAL(play(c456789, g111111, 6, 100), 101)      // guesser loses by running out of turns
         .CHECK_EQUAL(play(c456789, g111121, 6, 100), 101)      // guesser loses by running out of turns  
-	.CHECK_EQUAL(play(c456789, g1234, 5, 100), 0)     // chooser loses technically by choosing an illegal number (too long).
-	.CHECK_EQUAL(play(c456789, g1234, 4, 100), 0)     // chooser loses technically by choosing an illegal number (too long).
+        .CHECK_EQUAL(play(c456789, g1234, 5, 100), 0)     // chooser loses technically by choosing an illegal number (too long).
+        .CHECK_EQUAL(play(c456789, g1234, 4, 100), 0)     // chooser loses technically by choosing an illegal number (too long).
         .CHECK_EQUAL(play(c456789, g1234, 3, 100), 0)     // chooser loses technically by choosing an illegal number (too long).
         .CHECK_EQUAL(play(c456789, g1234, 2, 100), 0)     // chooser loses technically by choosing an illegal number (too long).
         .CHECK_EQUAL(play(c456789, g1234, 1, 100), 0);     // chooser loses technically by choosing an illegal number (too long).
@@ -129,7 +154,7 @@ int main() {
 		testcase.CHECK_EQUAL(play(randy, smarty, 1, 100)<=100, true);  // smarty should always win in at most 100 turns!
 	}
 	
-	//some cases with 4 digits!!
+	some cases with 4 digits!!
 	for (int i=800; i<1300; i++){
 		ConstantChooser chooseAll { numberToGuess(i, 4)};
 		testcase.CHECK_EQUAL(play(chooseAll, smarty, 4, 100)<=100, true);  // smarty should always win in at most 100 turns!        

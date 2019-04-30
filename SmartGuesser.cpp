@@ -17,7 +17,7 @@ string SmartGuesser::guess() {
 		for (int i=0; i<length; i++)
 			guess += to_string(i);
 	}
-	else if (myset.size()*pow(10.0, length) < 500000) 
+	else if (myset.size()*pow(10.0, length) < 50000) 
 		guess = guessByEfficiency();
 	else
 		//strategy: guess any possible number

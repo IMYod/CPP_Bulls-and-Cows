@@ -33,7 +33,7 @@ void SmartGuesser::startNewGame(uint theLength) {
 		this->myset.insert(numToGuess(i,theLength));
 	}
 	length = theLength;
-	lastGuess="-1";
+	lastGuess="-1";// init flag for a new game 
 }
 void SmartGuesser::learn(answer response) {
 	//if number in myset is match to the response -> insert it to the new set
@@ -70,7 +70,7 @@ string SmartGuesser::guessByMinOccur() {
 		for (int i=0; i<(*it).length(); ++i)
 			occurs[(*it)[i] -'0'][0]++;
 	
-	std::sort(occurs, occurs+10); //doesn't work
+	std::sort(occurs, occurs+10);
 	string guess = "";
 	for (int i=0; i<length; ++i){
 		guess += std::to_string(occurs[i][1]);
@@ -87,12 +87,12 @@ string SmartGuesser::guessByEfficiency() {
 	string bestGuess = "-1";
 
 
-	for (int i=0; i<maxNumber; ++i){
-		for (int j=0; j<=length; ++j)
+	for (int i=0; i<maxNumber; ++i){ // for every guess
+		for (int j=0; j<=length; ++j) // set zero in the matrix
 			for (int k=0; k<=length; ++k)
 				possibleReply[j][k]=0;
 
-		string iAsString = numToGuess(i,length);
+		string iAsString = numToGuess(i,length); 
 		for (auto it = myset.begin(); it != myset.end(); ++it ){
 			answer posReply = bullpgia::calculateBullAndPgia(*it, iAsString);
 			possibleReply[posReply.bull][posReply.pgia]++;		

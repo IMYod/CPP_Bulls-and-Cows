@@ -12,9 +12,14 @@ class SmartGuesser: public bullpgia::Guesser {
 		std::unordered_set<std::string> myset;
 		std::unordered_set<std::string> newSet; //using in learn function
 		std::string lastGuess;
-		
+
+		bool left = false;
+		bool right = false;
+		void createRight(std::string);		
+
 		std::string guessPossible();
 		std::string guessByEfficiency();
+		std::string guessByEfficiencyFast();
 		std::string guessByMinOccur();
 
 	public:

@@ -2,13 +2,18 @@
 #include <math.h>
 #include <iostream>
 #include <algorithm>
+#include <ctime>
+#include <chrono>
 #include <bits/stdc++.h>
 
 
 using std::string, std::to_string, std::unordered_set, bullpgia::answer;
 
 string SmartGuesser::guess() {
+	//std::cout << "size of set is: " << myset.size() << std::endl;
+
 	string guess;
+	
 	if (myset.size()<=2){
 		guess = guessPossible();
 	}
@@ -19,25 +24,42 @@ string SmartGuesser::guess() {
 	}
 	else if (myset.size()*pow(10.0, length) < 100000) 
 		guess = guessByEfficiency();
-	/*else if (myset.size()*length < 500000) 
-		guess = guessByMinOccur();*/
 	else
-		guess = guessPossible();
+		guess = guessByEfficiencyFast();
 	
 	this->lastGuess = guess;
 	return guess;
 }
 
 void SmartGuesser::startNewGame(uint theLength) {
-	//insert all possible numbers to myset
-	for (int i=0; i<pow(10.0,theLength); ++i){
-		this->myset.insert(numToGuess(i,theLength));
-	}
 	length = theLength;
+	if (length <=6){
+		//insert all possible numbers to myset
+		for (int i=0; i<pow(10.0,theLength); ++i){
+			this->myset.insert(numToGuess(i,theLength));
+		}
 	lastGuess="-1";
+	}
+
+	else { //create all strings like "01234&&&&&"
+		string dontCare = "";
+		for (int i=0; i<length - length/2; ++i)
+			dontCare = dontCare + "&";	
+
+		for (int i=0; i<pow(10.0,length/2); ++i)
+			this->myset.insert(numToGuess(i,theLength/2) + dontCare);
+		left = true;
+	}
 }
+
 void SmartGuesser::learn(answer response) {
 	//if number in myset is match to the response -> insert it to the new set
+
+	if (left && response.bull == length/2){
+		createRight(*myset.begin());
+		return;
+	}
+
 	myset.erase(lastGuess);
 	for ( auto it = myset.begin(); it != myset.end(); ++it ){
 		if (response==bullpgia::calculateBullAndPgia(*it, lastGuess)){
@@ -47,6 +69,12 @@ void SmartGuesser::learn(answer response) {
 	myset=newSet;
 	newSet.clear();
 
+}
+
+void SmartGuesser::createRight(string leftString){
+	myset.clear();
+	for (int i=0; i<pow(10.0,length - length/2); ++i)
+		this->myset.insert(leftString + numToGuess(i,length - length/2));
 }
 
 //convert number to guess type by padding "0"
@@ -101,6 +129,7 @@ string SmartGuesser::guessByMinOccur() {
 	for (std::vector<int>::iterator i=arr.begin(); i!=arr.end(); ++i)
 		randGuess += occurs[(*i)].digit;
 
+	std::cout << "Occur guess: " << randGuess << std::endl;
 	return randGuess;
 }
 
@@ -135,9 +164,46 @@ string SmartGuesser::guessByEfficiency() {
 			bestGuess = iAsString;
 		}
 	}
+	//std::cout << "Efficiency guess: " << bestGuess << std::endl;
 	return bestGuess;
 }
 
+
+//strategy: secret...
+string SmartGuesser::guessByEfficiencyFast() {
+	int maxNumber = pow(10.0, length);
+	int possibleReply[length+1][length+1];
+	
+	int minOfMaximums = maxNumber; //very high number
+	string bestGuess = "-1";
+
+	auto start = time(0);
+	for (auto itGuess = myset.begin(); itGuess != myset.end(); ++itGuess){
+		if (time(0) - start > 0.950)
+			break;
+		for (int j=0; j<=length; ++j)
+			for (int k=0; k<=length; ++k)
+				possibleReply[j][k]=0;
+
+		for (auto it = myset.begin(); it != myset.end(); ++it ){
+			answer posReply = bullpgia::calculateBullAndPgia(*it, *itGuess);
+			possibleReply[posReply.bull][posReply.pgia]++;		
+		}
+
+		int maxForI = 0;		
+		for (int j=0; j<=length; ++j)
+			for (int k=0; k<=length; ++k)
+				if (possibleReply[j][k] > maxForI)
+					maxForI = possibleReply[j][k];
+		
+		if (maxForI < minOfMaximums){
+			minOfMaximums = maxForI;
+			bestGuess = *itGuess;
+		}
+	}
+	//std::cout << "Fast Efficiency guess: " << bestGuess << std::endl;
+	return bestGuess;
+}
 
 
 

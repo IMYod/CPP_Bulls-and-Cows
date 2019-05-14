@@ -60,7 +60,7 @@ string numToGuess(int num, uint length){
 }
 
 //strategy: secret...
-string SmartGuesser::guessByMinOccur() {
+/*string SmartGuesser::guessByMinOccur() {
 	std::array <uint,2> occurs[10];
 	for (int i=0; i<10; ++i){
 		occurs[i][0]=0;
@@ -77,7 +77,7 @@ string SmartGuesser::guessByMinOccur() {
 		guess += std::to_string(occurs[i][1]);
 	}
 	return guess;
-}
+}*/
 
 //strategy: secret...
 string SmartGuesser::guessByEfficiency() {
